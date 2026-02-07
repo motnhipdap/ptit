@@ -1,0 +1,6 @@
+adafruit/Adafruit BusIO@^1.17.4
+mobizt/FirebaseClient@^2.2.2
+mobizt/FirebaseJson@^3.0.10
+adafruit/Adafruit BMP085 Library@^1.2.4
+adafruit/DHT sensor library@^1.4.6
+bogde/HX711@^0.7.5

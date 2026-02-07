@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://203.162.10.109:8080/JNPWS/DataService?wsdl" uri="wsdl/203.162.10.109_8080/JNPWS/DataService.wsdl"/>
+    <system systemId="http://203.162.10.109:8080/JNPWS/DataService?xsd=1" uri="wsdl/203.162.10.109_8080/JNPWS/DataService.xsd_1.xsd"/>
+    <system systemId="http://203.162.10.109:8080/JNPWS/ObjectService?wsdl" uri="wsdl/203.162.10.109_8080/JNPWS/ObjectService.wsdl"/>
+    <system systemId="http://203.162.10.109:8080/JNPWS/ObjectService?xsd=1" uri="wsdl/203.162.10.109_8080/JNPWS/ObjectService.xsd_1.xsd"/>
+</catalog>

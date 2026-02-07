@@ -1,0 +1,244 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+package "Handlers" {
+  class handleBase
+  class LoginRequestHandler {
+    +handle(msg : Object, oos : ObjectOutputStream, ctx : handlerContext) : void
+  }
+  LoginRequestHandler --|> handleBase
+}
+
+package "Controllers" {
+  class UserController {
+    +UserController(con : Connection)
+    +login(msg : Object) : LoginResponse
+    -buildLoginRes(result : LoginResult) : LoginResponse
+  }
+}
+
+package "Services" {
+  package "users" {
+    interface ILoginService {
+      +login(username : String, password : String) : LoginResult
+    }
+    interface IPlayerService {
+      +get(user_id : int) : Player
+    }
+
+    class LoginService {
+      +LoginService(con : Connection)
+      +login(username : String, password : String) : LoginResult
+      -getPlayer(u_id : int) : Player
+    }
+
+    class PlayerService {
+      +PlayerService(con : Connection)
+      +get(user_id : int) : Player
+    }
+
+    LoginService ..|> ILoginService
+    PlayerService ..|> IPlayerService
+  }
+}
+
+package "DAO" {
+  abstract class DAO {
+    #con : Connection
+    +DAO(con : Connection)
+    +getConnection() : Connection
+  }
+
+  interface IUserDAO {
+    +getByUsername(username : String) : User
+  }
+  interface IPlayerDAO {
+    +getByUID(user_id : int) : Player
+  }
+
+  class UserDAO {
+    +UserDAO(con : Connection)
+    +getByUsername(username : String) : User
+  }
+  class PlayerDAO {
+    +PlayerDAO(con : Connection)
+    +getByUID(user_id : int) : Player
+  }
+
+  UserDAO --|> DAO
+  PlayerDAO --|> DAO
+  UserDAO ..|> IUserDAO
+  PlayerDAO ..|> IPlayerDAO
+}
+
+package "Entities" {
+  class User {
+    +id : int
+    +username : String
+    +password : String
+    +email : String
+    +createdAt : Timestamp
+  }
+  class Player {
+    +id : int
+    +user_id : int
+    +name : String
+    +elo : int
+    +totalWin : int
+    +totalLoss : int
+    +totalMatch : int
+  }
+}
+
+package "Utils" {
+  class Hashing {
+    +checkPassword(plain : String, hashed : String) : boolean
+  }
+  class LoginResult {
+    +status : loginStatus
+    +user : User
+    +player : Player
+  }
+  class handlerContext {
+    +getUserId() : int
+    +setUserId(id : int) : void
+    +getPlayerId() : int
+    +setPlayerId(id : int) : void
+  }
+}
+
+package "Enums" {
+  enum loginStatus {
+    SUCCESS
+    USERNAME_NOT_EXITS
+    INCORRECT
+    ERROR
+  }
+}
+
+package "Managers" {
+  class dbManager {
+    {static} +getInstance() : dbManager
+    +getConnection() : Connection
+  }
+}
+
+package "Protocol (external)" {
+  class LoginRequest <<external>>
+  class LoginResponse <<external>>
+}
+
+' Dependencies / Associations
+LoginRequestHandler --> UserController
+LoginRequestHandler --> dbManager : getConnection()
+LoginRequestHandler ..> LoginRequest
+LoginRequestHandler ..> LoginResponse
+LoginRequestHandler ..> handlerContext
+
+UserController ..> ILoginService
+UserController ..> IPlayerService
+UserController ..> LoginResult
+UserController ..> LoginResponse
+UserController ..> LoginRequest
+
+LoginService --> IUserDAO
+LoginService --> IPlayerDAO
+LoginService ..> Hashing
+LoginService --> User
+LoginService --> Player
+
+UserDAO --> User
+PlayerDAO --> Player
+
+@enduml
+*** Begin Patch
+*** Update File: D:\PTIT\LTM\server\login.uml
+@@
+ GameClient --> ClientHandler
+ GameClient --> Message
+ GameClient --> ClientListener
+ 
+ @enduml
+-
+-@startuml
+-title Login sequence
+-actor Client
+-participant "LoginRequestHandler" as Handler
+-participant "dbManager" as DBM
+-participant "UserController" as UC
+-participant "LoginService" as LS
+-participant "UserDAO" as UDAO
+-participant "Hashing" as Hash
+-participant "PlayerDAO" as PDAO
+-database "DB" as DB
+-
+-Client -> Handler: LoginRequest(username, password)
+-Handler -> DBM: getConnection()
+-DBM --> Handler: Connection
+-Handler -> UC: new UserController(Connection)
+-Handler -> UC: login(LoginRequest)
+-UC -> LS: login(username, password)
+-LS -> UDAO: getByUsername(username)
+-UDAO -> DB: SELECT * FROM tbl_users WHERE username = ?
+-DB --> UDAO: User | null
+-UDAO --> LS: User | null
+-
+-alt user not found
+-  LS --> UC: LoginResult(USERNAME_NOT_EXITS)
+-  UC -> UC: buildLoginRes()
+-  UC --> Handler: LoginResponse(NOT_FOUND)
+-  Handler --> Client: LoginResponse(NOT_FOUND)
+-else user found
+-  LS -> Hash: checkPassword(password, user.password)
+-  Hash --> LS: boolean
+-  alt password correct
+-    LS -> PDAO: getByUID(user.id)
+-    PDAO -> DB: SELECT * FROM tbl_players WHERE user_id = ?
+-    DB --> PDAO: Player | null
+-    PDAO --> LS: Player | null
+-    LS --> UC: LoginResult(SUCCESS, user, player)
+-    UC -> UC: buildLoginRes()
+-    UC --> Handler: LoginResponse(OK, user, player?)
+-    Handler --> Client: LoginResponse(OK, ...)
+-  else incorrect password
+-    LS --> UC: LoginResult(INCORRECT)
+-    UC -> UC: buildLoginRes()
+-    UC --> Handler: LoginResponse(UNAUTHORIZED)
+-    Handler --> Client: LoginResponse(UNAUTHORIZED)
+-  end
+-end
+-@enduml
+*** End Patchct(reason : String) : void
+    -listenLoop() : void
+  }
+
+  class MessageHandler {
+    +processMessage(message : Message) : void
+    +handleLogin(message : Message) : void
+  }
+
+  class ClientHandler {
+    -socket : Socket
+    -in : ObjectInputStream
+    -out : ObjectOutputStream
+    -messageHandler : MessageHandler
+    +run() : void
+    +sendMessage() : void
+  }
+}
+
+' Relationships matching the diagram
+LoginController ..|> ClientListener
+LoginController --> GameClient
+LoginController ..> Message
+
+User ..|> Serializable
+
+ClientHandler --> MessageHandler
+GameClient --> ClientHandler
+GameClient --> Message
+GameClient --> ClientListener
+
+@enduml

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://medianews.vn/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://medianews.vn/">
+
+<xs:element name="getData" type="tns:getData" />
+
+<xs:element name="getDataDouble" type="tns:getDataDouble" />
+
+<xs:element name="getDataDoubleResponse" type="tns:getDataDoubleResponse" />
+
+<xs:element name="getDataResponse" type="tns:getDataResponse" />
+
+<xs:element name="submitDataInt" type="tns:submitDataInt" />
+
+<xs:element name="submitDataIntArray" type="tns:submitDataIntArray" />
+
+<xs:element name="submitDataIntArrayResponse" type="tns:submitDataIntArrayResponse" />
+
+<xs:element name="submitDataIntResponse" type="tns:submitDataIntResponse" />
+
+<xs:element name="submitDataString" type="tns:submitDataString" />
+
+<xs:element name="submitDataStringArray" type="tns:submitDataStringArray" />
+
+<xs:element name="submitDataStringArrayResponse" type="tns:submitDataStringArrayResponse" />
+
+<xs:element name="submitDataStringResponse" type="tns:submitDataStringResponse" />
+
+<xs:complexType name="submitDataStringArray">
+<xs:sequence>
+<xs:element name="studentCode" type="xs:string" minOccurs="0" />
+<xs:element name="qCode" type="xs:string" minOccurs="0" />
+<xs:element name="data" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="submitDataStringArrayResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="getDataDouble">
+<xs:sequence>
+<xs:element name="studentCode" type="xs:string" minOccurs="0" />
+<xs:element name="qCode" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDataDoubleResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="submitDataInt">
+<xs:sequence>
+<xs:element name="studentCode" type="xs:string" minOccurs="0" />
+<xs:element name="qCode" type="xs:string" minOccurs="0" />
+<xs:element name="data" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="submitDataIntResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="submitDataString">
+<xs:sequence>
+<xs:element name="studentCode" type="xs:string" minOccurs="0" />
+<xs:element name="qCode" type="xs:string" minOccurs="0" />
+<xs:element name="data" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="submitDataStringResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="getData">
+<xs:sequence>
+<xs:element name="studentCode" type="xs:string" minOccurs="0" />
+<xs:element name="qCode" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDataResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="submitDataIntArray">
+<xs:sequence>
+<xs:element name="studentCode" type="xs:string" minOccurs="0" />
+<xs:element name="qCode" type="xs:string" minOccurs="0" />
+<xs:element name="data" type="xs:int" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="submitDataIntArrayResponse">
+<xs:sequence />
+</xs:complexType>
+</xs:schema>

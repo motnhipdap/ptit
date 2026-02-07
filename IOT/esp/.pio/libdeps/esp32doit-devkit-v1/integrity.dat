@@ -1,0 +1,10 @@
+mobizt/FirebaseJson@^3.0.10
+knolleary/PubSubClient@^2.8
+adafruit/Adafruit Unified Sensor@^1.1.14
+adafruit/Adafruit BMP085 Library@^1.2.1
+mathworks/ThingSpeak@^2.0.0
+adafruit/Adafruit NeoPixel@^1.10.6
+adafruit/DHT sensor library@^1.4.3
+bogde/HX711@^0.7.5
+mobizt/FirebaseClient@^2.2.2
+bblanchon/ArduinoJson@^6.21.3

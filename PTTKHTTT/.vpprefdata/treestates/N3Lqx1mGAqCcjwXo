@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProjectTreeState projectID="uwP4tlmGAqAAZgWe" projectPath="D:\PTIT\PTTKHTTT\PTTKHT.vpp">
+	<TreeState name="ModelRepository" viewX="0" viewY="0">
+		<ExpandedPath>ModelRepository</ExpandedPath>
+		<SelectedPath>ModelRepository,72mum1mFYFlgAQyP</SelectedPath>
+	</TreeState>
+	<TreeState name="DiagramNavigator" viewX="0" viewY="0">
+		<ExpandedPath>DiagramNavigator</ExpandedPath>
+		<ExpandedPath>DiagramNavigator,UML Diagrams</ExpandedPath>
+		<ExpandedPath>ClassDiagram</ExpandedPath>
+		<ExpandedPath>CommunicationDiagram</ExpandedPath>
+		<ExpandedPath>StateDiagram</ExpandedPath>
+		<ExpandedPath>DeploymentDiagram</ExpandedPath>
+		<ExpandedPath>PackageDiagram</ExpandedPath>
+		<SelectedPath>DeploymentDiagram,mwiEJ1mGAqCcjxnt</SelectedPath>
+	</TreeState>
+	<TreeState name="ClassBrowser" viewX="0" viewY="0"/>
+	<TreeState name="LogicalView" viewX="0" viewY="0"/>
+	<TreeState name="DiagramBacklog" viewX="0" viewY="0"/>
+</ProjectTreeState>

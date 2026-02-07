@@ -1,0 +1,27 @@
+DATA SCIENCE 
+	- Khai phá,quản trị, phân tích dữ liệu để dự đoán và đưa ra quyết định
+	- 3 Phần chính: 
+		+ Tạo, quản trị
+		+ Phân tích dữ liệu
+		+
+	- Tri thức:
+		+ Toán (Thống kê + ĐSTT)
+		+ CNTT (Học máy- machine Learning)
+		+ Tri thức của lĩnh vực ứng dụng cụ thể
+		
+	- Kiến thức yêu cầu:
+		- Python
+		- DB
+		- 
+Chương 1: Kiến thức cơ sở
+	- Ôn tập về ĐSTT,XSTK
+		+ Ai,j = (-1)^(i+j) * det(M(i,j))
+	
+	- buổi 1: 
+		+ bài tập: viết chay và dùng thư viện
+			+ kiểm tra ma trận tam giá trên dưới, đường chéo
+			+ tính tổng 2 ma trận, tích , tích với số
+			+ định thức, T(nghịch đảo)
+			
+			
+		
